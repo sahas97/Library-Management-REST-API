@@ -11,6 +11,8 @@ const app = express();
 //middleware
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
+//Middleware to intercept errors
+app.use(errorHandler);
 //remove this from production
 app.use(morgan("dev"));
 app.get('/', (req, res) => {
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 //routes
+app.use('/library', mainRoutes);
 
 //export app
 module.exports = app;
